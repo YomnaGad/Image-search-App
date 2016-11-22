@@ -3,36 +3,48 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:background="@color/colorPrimary"
     android:padding="10dip">
     <!--  Email Label -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:padding="10dip">
     <TextView android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textColor="#372c24"
+        android:textColor="#f5f5f5"
         android:text="Email"/>
     <EditText android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dip"
         android:layout_marginBottom="20dip"
         android:id="@+id/email"
+        android:textColor="@color/colorAccent"
         android:singleLine="true"/>
     <!--  Password Label -->
     <TextView android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textColor="#372c24"
+        android:textColor="#f5f5f5"
         android:text="Password"/>
     <EditText android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dip"
         android:id="@+id/password"
         android:singleLine="true"
+        android:textColor="@color/colorAccent"
         android:password="true"/>
     <!-- Login button -->
     <Button android:id="@+id/btnLogin"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dip"
-        android:text="Login"/>
+        android:background="@color/colorPrimaryDark"
+        android:text="Login"
+        android:textColor="@color/colorAccent"/>
     <!-- Link to Registration Screen -->
     <TextView android:id="@+id/link_to_register"
         android:layout_width="fill_parent"
@@ -42,6 +54,6 @@
         android:text="New user? Register here"
         android:gravity="center"
         android:textSize="20dip"
-        android:textColor="#0b84aa"/>
-
+        android:textColor="#f5f5f5"/>
+    </LinearLayout>
 </LinearLayout>

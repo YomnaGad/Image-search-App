@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+
+    android:background="@color/colorPrimary"
+    android:padding="10dip">
+
+
+        <!--  username Label -->
+        <TextView android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#f5f5f5"
+            android:text="Username"/>
+        <EditText android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="20dip"
+            android:id="@+id/Username"
+            android:textColor="@color/colorAccent"
+            android:singleLine="true"/>
+        <!--  Email Label -->
+        <TextView android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#f5f5f5"
+            android:text="Email"/>
+        <EditText android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="20dip"
+            android:id="@+id/email"
+            android:textColor="@color/colorAccent"
+            android:singleLine="true"/>
+
+        <!--  Password Label -->
+        <TextView android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#f5f5f5"
+            android:text="Password"/>
+        <EditText android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:id="@+id/password"
+            android:singleLine="true"
+            android:textColor="@color/colorAccent"
+            android:password="true"/>
+        <!--  confirm Password Label -->
+        <TextView android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#f5f5f5"
+            android:text="Confirm Password"/>
+        <EditText android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:id="@+id/confirmPassword"
+            android:singleLine="true"
+            android:textColor="@color/colorAccent"
+            android:password="true"/>
+
+        <!-- Login button -->
+        <Button android:id="@+id/btnRegister"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:background="@color/colorPrimaryDark"
+            android:text="Sign Up"
+            android:textColor="@color/colorAccent"/>
+
+
+</LinearLayout>

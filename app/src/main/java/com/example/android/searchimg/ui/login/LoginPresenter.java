@@ -37,6 +37,9 @@ public class LoginPresenter {
         }
 
     }
+    public void linkToRegister(){
+        view.startRegisterActivity();
+    }
 
 }
 

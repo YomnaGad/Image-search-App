@@ -3,4 +3,11 @@
     <string name="email_error">Enter email</string>
     <string name="password_error">Enter password</string>
     <string name="login_failed">Login failed</string>
+
+    <string name="username_error">Enter username</string>
+    <string name="confirm_password_error">Enter confirm password</string>
+    <string name="register_failed">register failed</string>
+    <string name="confirm_password_error_match">Confirm password does not match</string>
+
+
 </resources>

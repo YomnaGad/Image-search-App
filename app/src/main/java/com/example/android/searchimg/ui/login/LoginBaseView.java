@@ -9,5 +9,6 @@ public interface LoginBaseView {
     public String getPassword();
     public void showPasswordError(int resId);
     public void startMainActivity();
+    public void startRegisterActivity();
     public void showLoginError(int resId);
 }

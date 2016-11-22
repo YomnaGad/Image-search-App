@@ -11,4 +11,8 @@ public class DataManager {
         else
             return false;
     }
+
+    public boolean Register(String username, String email, String password, String confirmPassword) {
+        return true;
+    }
 }
