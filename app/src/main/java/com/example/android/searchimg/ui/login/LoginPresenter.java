@@ -1,7 +1,10 @@
 package com.example.android.searchimg.ui.login;
 
+import android.util.Log;
+
 import com.example.android.searchimg.R;
 import com.example.android.searchimg.data.DataManager;
+import com.example.android.searchimg.data.model.User;
 
 /**
  * Created by Yomna on 11/21/2016.
@@ -15,31 +18,16 @@ public class LoginPresenter {
         this.dataManager = dataManager;
     }
 
-    public void onLoginClicked() {
-        String email = view.getEmail();
-        if(email.isEmpty()){
-            view.showEmailError(R.string.email_error);
-            return;
-        }
+    public void login(User user){
+        boolean loginSucceeded = dataManager.login(user.getMail(), user.getPassword());
+        Log.i("TAGGGG", "login: "+user.getMail()+"::"+user.getPassword());
+        Log.i("TAGGGG", "login: "+loginSucceeded);
 
-        String password = view.getPassword();
-        if(password.isEmpty()){
-            view.showPasswordError(R.string.password_error);
-            return;
-        }
-        boolean loginSucceeded = dataManager.login(email, password);
         if(loginSucceeded){
-            view.startMainActivity();
-            return;
+            view.loginSuccess();
+        }else{
+            view.loginError("User not registered");
         }
-        else if(!loginSucceeded) {
-            view.showLoginError(R.string.login_failed);
-        }
-
     }
-    public void linkToRegister(){
-        view.startRegisterActivity();
-    }
-
 }
 
