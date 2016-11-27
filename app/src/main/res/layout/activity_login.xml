@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/login_main_view"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -27,9 +27,49 @@
                 android:id="@+id/login_emailED"
                 android:textColor="@color/colorAccent"
                 android:textColorHint="@color/colorPrimary"
+                android:backgroundTint="@color/colorPrimary"
                 android:maxLines="1"
-                android:hint="Email"/>
+                android:hint="Email"
+                />
         </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/login_passwordTIL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorPrimary"
+            android:layout_marginTop="5dip"
+            app:passwordToggleTint="@color/colorPrimary"
+            app:passwordToggleEnabled="true"
+            android:layout_marginBottom="20dip">
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/login_passwordlED"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/colorPrimary"
+                android:backgroundTint="@color/colorPrimary"
+                android:maxLines="1"
+                android:inputType="textPassword"
+                android:hint="Password"
+
+
+                />
+        </android.support.design.widget.TextInputLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <!--<TextView android:layout_width="fill_parent"-->
             <!--android:layout_height="wrap_content"-->
@@ -43,7 +83,9 @@
             <!--android:textColor="@color/colorAccent"-->
             <!--android:singleLine="true"/>-->
         <!--&lt;!&ndash;  Password Label &ndash;&gt;-->
-        <TextView android:layout_width="fill_parent"
+
+
+       <!-- <TextView android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textColor="#f5f5f5"
             android:text="Password"/>
@@ -52,8 +94,9 @@
             android:layout_marginTop="5dip"
             android:id="@+id/password"
             android:singleLine="true"
+            android:backgroundTint="@color/colorPrimary"
             android:textColor="@color/colorAccent"
-            android:password="true"/>
+            android:password="true"/>-->
         <!-- Login button -->
         <Button android:id="@+id/btnLogin"
             android:layout_width="fill_parent"

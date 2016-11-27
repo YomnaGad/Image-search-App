@@ -8,9 +8,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.android.searchimg.MainActivity;
 import com.example.android.searchimg.R;
@@ -26,7 +24,11 @@ public class LoginActivity extends AppCompatActivity implements LoginBaseView, V
     private TextInputLayout emailTIL;
 
     private TextInputEditText emailED;
-    private EditText passwordED;
+
+    private TextInputLayout passwordTIL;
+
+    private TextInputEditText passwordED;
+
 
     private Button loginButtonView;
     private TextView registerView;
@@ -54,7 +56,9 @@ public class LoginActivity extends AppCompatActivity implements LoginBaseView, V
         emailTIL = (TextInputLayout) findViewById(R.id.login_emailTIL);
         emailED = (TextInputEditText) findViewById(R.id.login_emailED);
 
-        passwordED = (EditText) findViewById(R.id.password);
+        passwordTIL = (TextInputLayout) findViewById(R.id.login_passwordTIL);
+        passwordED = (TextInputEditText) findViewById(R.id.login_passwordlED);
+
 
 
         loginButtonView = (Button) findViewById(R.id.btnLogin);
@@ -98,6 +102,7 @@ public class LoginActivity extends AppCompatActivity implements LoginBaseView, V
 
     @Override
     public void loginError(String e) {
+
         Snackbar.make(mainView, e, Snackbar.LENGTH_SHORT).show();
     }
 
