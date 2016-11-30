@@ -1,7 +1,7 @@
-package com.example.android.searchimg.data.model;
+package com.example.android.searchimg.utils;
 
 /**
- * Created by Yomna on 11/27/2016.
+ * Created by Yomna on 11/30/2016.
  */
 public class GlobalEntities {
     //server urls

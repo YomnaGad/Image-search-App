@@ -37,7 +37,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterBaseV
     private TextInputLayout ConfirmPasswordTIL;
 
     private TextInputEditText ConfirmPasswordED;
-;
+
     private Button registerButtonView;
     private RegisterPresenter presenter;
     User user ;

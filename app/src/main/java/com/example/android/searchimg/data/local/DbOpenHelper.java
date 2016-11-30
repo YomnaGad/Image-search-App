@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.android.searchimg.data.model.GlobalEntities;
+import com.example.android.searchimg.utils.GlobalEntities;
 
 /**
  * Created by Yomna on 11/27/2016.
@@ -13,7 +13,7 @@ import com.example.android.searchimg.data.model.GlobalEntities;
 public class DbOpenHelper extends SQLiteOpenHelper {
     private static DbOpenHelper dbOpenHelper;
 
-    public static final String DATABASE_NAME = "egycps.db";
+    public static final String DATABASE_NAME = "imgSearch.db";
     public static final int DATABASE_VERSION = 1;
 
     private DbOpenHelper(Context context) {
