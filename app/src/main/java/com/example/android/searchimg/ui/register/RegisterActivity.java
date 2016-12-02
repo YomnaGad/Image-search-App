@@ -70,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterBaseV
         ConfirmPasswordTIL =(TextInputLayout) findViewById(R.id.register_confirm_passwordTIL);
         ConfirmPasswordED = (TextInputEditText) findViewById(R.id.register_confirm_passwordlED);
         registerButtonView = (Button) findViewById(R.id.btnRegister);
-        presenter = new RegisterPresenter(this, new DataManager());
+        presenter = new RegisterPresenter(this, DataManager.getInstance(null, null,null,null));
         registerButtonView.setOnClickListener( this);
     }
 

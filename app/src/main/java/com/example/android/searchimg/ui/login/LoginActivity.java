@@ -10,10 +10,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.android.searchimg.MainActivity;
 import com.example.android.searchimg.R;
 import com.example.android.searchimg.data.DataManager;
+import com.example.android.searchimg.data.local.DatabaseHelper;
+import com.example.android.searchimg.data.local.DbOpenHelper;
+import com.example.android.searchimg.data.local.PreferencesHelper;
 import com.example.android.searchimg.data.model.User;
+import com.example.android.searchimg.data.remote.Service;
+import com.example.android.searchimg.ui.home.HomeActivity;
 import com.example.android.searchimg.ui.register.RegisterActivity;
 
 /**
@@ -44,6 +48,11 @@ public class LoginActivity extends AppCompatActivity implements LoginBaseView, V
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        DbOpenHelper dbOpenHelper = DbOpenHelper.getInstance(this.getApplicationContext());
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(dbOpenHelper);
+        PreferencesHelper preferencesHelper = new PreferencesHelper();
+        Service service = Service.Creator.getService();
+        DataManager dataManager = DataManager.getInstance(this, service, databaseHelper, preferencesHelper);
         init();
 
     }
@@ -68,7 +77,7 @@ public class LoginActivity extends AppCompatActivity implements LoginBaseView, V
 
         registerView.setOnClickListener(this);
 
-        presenter = new LoginPresenter(this, new DataManager());
+        presenter = new LoginPresenter(this, DataManager.getInstance(null, null,null,null));
     }
 
     @Override
@@ -90,7 +99,7 @@ public class LoginActivity extends AppCompatActivity implements LoginBaseView, V
     public void loginSuccess() {
 
         //start main activity
-        Intent i = MainActivity.getStartIntent(LoginActivity.this);
+        Intent i = HomeActivity.getStartIntent(LoginActivity.this);
         // start new activity is considered as a new task so define flag for it
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         //set flag no history no return for stacked activities
