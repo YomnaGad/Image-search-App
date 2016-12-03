@@ -11,5 +11,7 @@
     <string name="app_label">Search</string>
     <string name="seach_hint">Search photos</string>
 
-
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="app_logo">ImageSearch</string>
 </resources>

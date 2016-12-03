@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_landing"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryDark"
+    android:padding="16dip"
+    tools:context="com.example.android.searchimg.ui.landing.LandingActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/logo"
+        android:layout_gravity="center"
+        android:layout_marginTop="90dip"
+        android:textSize="45dip"
+        android:textColor="@color/colorAccent"
+        android:text="@string/app_logo"/>
+
+    <Button
+        android:layout_width="302dip"
+        android:layout_height="wrap_content"
+        android:id="@+id/login_btn"
+        android:layout_gravity="center"
+        android:layout_marginTop="130dip"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
+        android:text="@string/login"/>
+
+    <Button
+        android:layout_width="304dip"
+        android:layout_height="wrap_content"
+        android:id="@+id/register_btn"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dip"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
+        android:text="@string/register"/>
+
+</LinearLayout>
