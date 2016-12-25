@@ -5,10 +5,14 @@ import android.util.Log;
 
 import com.example.android.searchimg.data.local.DatabaseHelper;
 import com.example.android.searchimg.data.local.PreferencesHelper;
+import com.example.android.searchimg.data.model.Response;
+import com.example.android.searchimg.data.model.User;
 import com.example.android.searchimg.data.remote.Service;
 import com.example.android.searchimg.utils.GlobalEntities;
 
 import java.util.ArrayList;
+
+import rx.Observable;
 
 /**
  * Created by Yomna on 11/21/2016.
@@ -45,17 +49,7 @@ public class DataManager {
         return mPreferencesHelper;
     }
 
-    public boolean login(String email, String password) {
-        if(email.equals("yomna_gad@hotmail.com") & password.equals("yomna2210")) {
-            return true;
-        }
-        else
-            return false;
-    }
 
-    public boolean Register(String username, String email, String password) {
-        return true;
-    }
 
     // creating dummy data for recyclerview for album in home page
     public ArrayList<String> imageNameList(){
@@ -67,4 +61,20 @@ public class DataManager {
         list.add("Ayah");
         return list;
     }
+
+    public Observable<Response> login(User user){
+        return mService.login(user).asObservable();
+    }
+
+    public Observable<Response> createUser(User user){
+        Log.i(GlobalEntities.REGISTER_PRESENTER_TAG, "DATAMANGER: SUCCESS");
+        return mService.createUser(user).asObservable();
+
+    }
+ /*  public Call createUser(User user){
+       Log.i(GlobalEntities.REGISTER_PRESENTER_TAG, "DATAMANGER: SUCCESS");
+       return mService.registerUser(user);
+
+   }*/
+
 }

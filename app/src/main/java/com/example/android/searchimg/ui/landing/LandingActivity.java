@@ -7,6 +7,11 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.android.searchimg.R;
+import com.example.android.searchimg.data.DataManager;
+import com.example.android.searchimg.data.local.DatabaseHelper;
+import com.example.android.searchimg.data.local.DbOpenHelper;
+import com.example.android.searchimg.data.local.PreferencesHelper;
+import com.example.android.searchimg.data.remote.Service;
 import com.example.android.searchimg.ui.login.LoginActivity;
 import com.example.android.searchimg.ui.register.RegisterActivity;
 
@@ -21,6 +26,11 @@ public class LandingActivity extends AppCompatActivity {
 
         loginBtn = (Button) findViewById(R.id.login_btn);
         registerBtn = (Button) findViewById(R.id.register_btn);
+        DbOpenHelper dbOpenHelper = DbOpenHelper.getInstance(this.getApplicationContext());
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(dbOpenHelper);
+        PreferencesHelper preferencesHelper = new PreferencesHelper();
+        Service service = Service.Creator.getService();
+        DataManager dataManager = DataManager.getInstance(this, service, databaseHelper, preferencesHelper);
 
         init();
     }

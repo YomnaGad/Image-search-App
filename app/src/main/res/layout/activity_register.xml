@@ -10,14 +10,60 @@
     android:background="@color/colorPrimaryDark"
     android:padding="10dip">
 
+        <LinearLayout
 
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:gravity="center_vertical"
+
+            android:background="@color/colorPrimaryDark"
+            >
+                <!--android:layout_marginTop="5dip"
+            android:layout_marginBottom="20dip"-->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/register_firstNameTIL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorPrimary"
+            >
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/register_firstNameED"
+                    android:textColor="@color/colorAccent"
+                    android:textColorHint="@color/colorPrimary"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:maxLength="32"
+                    android:inputType="textPersonName"
+                    android:hint="First name"
+                    />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/register_lastNameTIL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorPrimary"
+           >
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/register_lastNameED"
+                    android:textColor="@color/colorAccent"
+                    android:textColorHint="@color/colorPrimary"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:maxLength="32"
+                    android:inputType="textPersonName"
+                    android:hint="Last name"
+                    />
+        </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:id="@+id/register_usernameTIL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/colorPrimary"
-            android:layout_marginTop="5dip"
-            android:layout_marginBottom="20dip">
+            >
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,18 +71,19 @@
             android:textColor="@color/colorAccent"
             android:textColorHint="@color/colorPrimary"
             android:backgroundTint="@color/colorPrimary"
-            android:maxLines="1"
+            android:maxLength="32"
+            android:inputType="textPersonName"
             android:hint="Username"
             />
         </android.support.design.widget.TextInputLayout>
+
         <!--  Email Label -->
         <android.support.design.widget.TextInputLayout
             android:id="@+id/register_emailTIL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/colorPrimary"
-            android:layout_marginTop="5dip"
-            android:layout_marginBottom="20dip">
+            >
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -44,7 +91,8 @@
                     android:textColor="@color/colorAccent"
                     android:textColorHint="@color/colorPrimary"
                     android:backgroundTint="@color/colorPrimary"
-                    android:maxLines="1"
+                    android:maxLength="128"
+                    android:inputType="textEmailAddress"
                     android:hint="Email"
                     />
         </android.support.design.widget.TextInputLayout>
@@ -57,7 +105,7 @@
             android:layout_marginTop="5dip"
             app:passwordToggleTint="@color/colorPrimary"
             app:passwordToggleEnabled="true"
-            android:layout_marginBottom="20dip">
+            >
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -65,7 +113,7 @@
                     android:textColor="@color/colorAccent"
                     android:textColorHint="@color/colorPrimary"
                     android:backgroundTint="@color/colorPrimary"
-                    android:maxLines="1"
+                    android:maxLength="32"
                     android:inputType="textPassword"
                     android:hint="Password"
 
@@ -81,7 +129,7 @@
             android:layout_marginTop="5dip"
             app:passwordToggleTint="@color/colorPrimary"
             app:passwordToggleEnabled="true"
-            android:layout_marginBottom="20dip">
+            >
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -89,10 +137,9 @@
                     android:textColor="@color/colorAccent"
                     android:textColorHint="@color/colorPrimary"
                     android:backgroundTint="@color/colorPrimary"
-                    android:maxLines="1"
+                    android:maxLength="32"
                     android:inputType="textPassword"
                     android:hint="Password"
-
 
                     />
         </android.support.design.widget.TextInputLayout>
@@ -101,10 +148,8 @@
         <Button android:id="@+id/btnRegister"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dip"
             android:background="@color/colorPrimary"
             android:text="Sign Up"
             android:textColor="@color/colorAccent"/>
-
-
+        </LinearLayout>
 </LinearLayout>

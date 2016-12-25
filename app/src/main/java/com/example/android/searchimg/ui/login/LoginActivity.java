@@ -12,22 +12,20 @@ import android.widget.TextView;
 
 import com.example.android.searchimg.R;
 import com.example.android.searchimg.data.DataManager;
-import com.example.android.searchimg.data.local.DatabaseHelper;
-import com.example.android.searchimg.data.local.DbOpenHelper;
 import com.example.android.searchimg.data.local.PreferencesHelper;
 import com.example.android.searchimg.data.model.User;
-import com.example.android.searchimg.data.remote.Service;
 import com.example.android.searchimg.ui.home.HomeActivity;
 import com.example.android.searchimg.ui.register.RegisterActivity;
+import com.example.android.searchimg.utils.GlobalEntities;
 
 /**
  * Created by Yomna on 11/21/2016.
  */
 public class LoginActivity extends AppCompatActivity implements LoginBaseView, View.OnClickListener{
 
-    private TextInputLayout emailTIL;
+    private TextInputLayout usernameTIL;
 
-    private TextInputEditText emailED;
+    private TextInputEditText usernameED;
 
     private TextInputLayout passwordTIL;
 
@@ -48,11 +46,11 @@ public class LoginActivity extends AppCompatActivity implements LoginBaseView, V
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        DbOpenHelper dbOpenHelper = DbOpenHelper.getInstance(this.getApplicationContext());
+       /* DbOpenHelper dbOpenHelper = DbOpenHelper.getInstance(this.getApplicationContext());
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(dbOpenHelper);
         PreferencesHelper preferencesHelper = new PreferencesHelper();
         Service service = Service.Creator.getService();
-        DataManager dataManager = DataManager.getInstance(this, service, databaseHelper, preferencesHelper);
+        DataManager dataManager = DataManager.getInstance(this, service, databaseHelper, preferencesHelper);*/
         init();
 
     }
@@ -62,8 +60,8 @@ public class LoginActivity extends AppCompatActivity implements LoginBaseView, V
 
         mainView = findViewById(R.id.login_main_view);
 
-        emailTIL = (TextInputLayout) findViewById(R.id.login_emailTIL);
-        emailED = (TextInputEditText) findViewById(R.id.login_emailED);
+        usernameTIL = (TextInputLayout) findViewById(R.id.login_usernameTIL);
+        usernameED = (TextInputEditText) findViewById(R.id.login_usernameED);
 
         passwordTIL = (TextInputLayout) findViewById(R.id.login_passwordTIL);
         passwordED = (TextInputEditText) findViewById(R.id.login_passwordlED);
@@ -84,8 +82,10 @@ public class LoginActivity extends AppCompatActivity implements LoginBaseView, V
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btnLogin:
-                user.setMail(emailED.getText().toString());
-                user.setPassword(passwordED.getText().toString());
+                String usernameTemp = usernameED.getText().toString().replaceAll(" ", "");
+                user.setUsername(usernameTemp);
+                String passwordTemp = passwordED.getText().toString().replaceAll(" ", "");
+                user.setPassword(passwordTemp);
 
                 presenter.login(user);
                 break;
@@ -96,7 +96,12 @@ public class LoginActivity extends AppCompatActivity implements LoginBaseView, V
     }
 
     @Override
-    public void loginSuccess() {
+    public void loginSuccess(User user) {
+
+        PreferencesHelper.saveToPrefs(this, GlobalEntities.USER_LOGGED_IN_TAG, GlobalEntities.SUCCESS_TAG);
+        PreferencesHelper.saveToPrefs(this, GlobalEntities.USERNAME_TAG, user.getUsername());
+        PreferencesHelper.saveToPrefs(this, GlobalEntities.Password_TAG, user.getPassword());
+
 
         //start main activity
         Intent i = HomeActivity.getStartIntent(LoginActivity.this);

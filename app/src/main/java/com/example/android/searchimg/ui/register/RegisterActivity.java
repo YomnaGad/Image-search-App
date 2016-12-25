@@ -6,15 +6,15 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.android.searchimg.MainActivity;
 import com.example.android.searchimg.R;
 import com.example.android.searchimg.data.DataManager;
 import com.example.android.searchimg.data.model.User;
+import com.example.android.searchimg.ui.home.HomeActivity;
 
 /**
  * Created by Yomna on 11/22/2016.
@@ -25,6 +25,14 @@ public class RegisterActivity extends AppCompatActivity implements RegisterBaseV
     private TextInputLayout usernameTIL;
 
     private TextInputEditText usernameED;
+
+    private  TextInputLayout firstNameTIL;
+
+    private  TextInputEditText firstNameED;
+
+    private  TextInputLayout lastNameTIL;
+
+    private  TextInputEditText lastNameED;
 
     private TextInputLayout emailTIL;
 
@@ -41,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterBaseV
     private Button registerButtonView;
     private RegisterPresenter presenter;
     User user ;
-
+    String temp = "";
     public static Intent getStartIntent(Context context){
         return new Intent(context, RegisterActivity.class);
     }
@@ -51,6 +59,12 @@ public class RegisterActivity extends AppCompatActivity implements RegisterBaseV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         getSupportActionBar().hide();
+       /* DbOpenHelper dbOpenHelper = DbOpenHelper.getInstance(this.getApplicationContext());
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(dbOpenHelper);
+        PreferencesHelper preferencesHelper = new PreferencesHelper();
+        Service service = Service.Creator.getService();
+        DataManager dataManager = DataManager.getInstance(this, service, databaseHelper, preferencesHelper);*/
+
         init();
 
 
@@ -62,13 +76,21 @@ public class RegisterActivity extends AppCompatActivity implements RegisterBaseV
         usernameTIL = (TextInputLayout) findViewById(R.id.register_usernameTIL);
         usernameED = (TextInputEditText) findViewById(R.id.register_usernameED);
 
+        firstNameTIL = (TextInputLayout) findViewById(R.id.register_firstNameTIL);
+        firstNameED = (TextInputEditText) findViewById(R.id.register_firstNameED);
+
+        lastNameTIL = (TextInputLayout) findViewById(R.id.register_lastNameTIL);
+        lastNameED = (TextInputEditText) findViewById(R.id.register_lastNameED);
+
         emailTIL = (TextInputLayout) findViewById(R.id.register_emailTIL);
         emailED = (TextInputEditText)findViewById(R.id.register_emailED);
 
         passwordTIL = (TextInputLayout) findViewById(R.id.register_passwordTIL);
         passwordED = (TextInputEditText) findViewById(R.id.register_passwordlED);
+
         ConfirmPasswordTIL =(TextInputLayout) findViewById(R.id.register_confirm_passwordTIL);
         ConfirmPasswordED = (TextInputEditText) findViewById(R.id.register_confirm_passwordlED);
+
         registerButtonView = (Button) findViewById(R.id.btnRegister);
         presenter = new RegisterPresenter(this, DataManager.getInstance(null, null,null,null));
         registerButtonView.setOnClickListener( this);
@@ -89,9 +111,25 @@ public class RegisterActivity extends AppCompatActivity implements RegisterBaseV
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btnRegister:
-                user.setUsername(usernameED.getText().toString());
-                user.setMail(emailED.getText().toString());
-                user.setPassword(passwordED.getText().toString());
+                temp = firstNameED.getText().toString().replaceAll(" ", "");
+                user.setFirstName(temp);
+                Log.i("FIrst name",firstNameED.getText().toString() );
+
+                temp = lastNameED.getText().toString().replaceAll(" ", "");
+                user.setLastName(temp);
+                Log.i("Last name",lastNameED.getText().toString() );
+
+                temp = usernameED.getText().toString().replaceAll(" ", "");
+                user.setUsername(temp);
+                Log.i("username",usernameED.getText().toString() );
+
+                temp = emailED.getText().toString().replaceAll(" ", "");
+                user.setMail(temp);
+                Log.i("emailED",emailED.getText().toString() );
+
+                temp = passwordED.getText().toString().replaceAll(" ", "");
+                user.setPassword(temp);
+                Log.i("passwordED",passwordED.getText().toString() );
                 if(!ConfirmPasswordED.getText().toString().equals(user.getPassword()))
                     showPasswordMatchError(R.string.confirm_password_error_match);
                 else
@@ -103,13 +141,16 @@ public class RegisterActivity extends AppCompatActivity implements RegisterBaseV
     }
 
     @Override
-    public void registerSuccess() {
+    public void registerSuccess(User user) {
         //start main activity
-        Intent i = MainActivity.getStartIntent(RegisterActivity.this);
+        Intent i = HomeActivity.getStartIntent(RegisterActivity.this);
         // start new activity is considered as a new task so define flag for it
        // i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        // start new activity is considered as a new task so define flag for it
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         //set flag no history no return for stacked activities
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+        i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(i);
         //destroy current activity
         finish();
