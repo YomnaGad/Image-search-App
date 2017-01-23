@@ -88,6 +88,7 @@ public class LoginActivity extends AppCompatActivity implements LoginBaseView, V
                 user.setPassword(passwordTemp);
 
                 presenter.login(user);
+
                 break;
             case R.id.link_to_register:
                 startActivity(RegisterActivity.getStartIntent(LoginActivity.this));
@@ -101,17 +102,18 @@ public class LoginActivity extends AppCompatActivity implements LoginBaseView, V
         PreferencesHelper.saveToPrefs(this, GlobalEntities.USER_LOGGED_IN_TAG, GlobalEntities.SUCCESS_TAG);
         PreferencesHelper.saveToPrefs(this, GlobalEntities.USERNAME_TAG, user.getUsername());
         PreferencesHelper.saveToPrefs(this, GlobalEntities.Password_TAG, user.getPassword());
-
+        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+        startActivity(intent);
 
         //start main activity
-        Intent i = HomeActivity.getStartIntent(LoginActivity.this);
+      /*  Intent i = HomeActivity.getStartIntent(LoginActivity.this);
         // start new activity is considered as a new task so define flag for it
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         //set flag no history no return for stacked activities
         i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(i);
         //destroy current activity
-        finish();
+        finish();*/
     }
 
     @Override

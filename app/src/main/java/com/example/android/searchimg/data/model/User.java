@@ -13,21 +13,22 @@ public class User {
     private String password;
     @SerializedName("email")
     private String mail;
+    @SerializedName("image")
+    private String image;
 
-
-    public User(String firstName, String lastName, String username, String password, String mail) {
+    public User(String firstName, String lastName, String username, String password, String mail,String image) {
         this.firstName = firstName;
         this.lastName = lastName;
 
         this.username = username;
         this.password = password;
         this.mail = mail;
-
+        this.image = image;
     }
 
 
     public User() {
-        this("", "", "", "", "");
+        this("", "", "", "", "", "");
     }
 
     public String getUsername() {
@@ -68,5 +69,13 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
     }
 }

@@ -15,6 +15,7 @@ import com.example.android.searchimg.R;
 import com.example.android.searchimg.data.DataManager;
 import com.example.android.searchimg.data.model.User;
 import com.example.android.searchimg.ui.home.HomeActivity;
+import com.example.android.searchimg.ui.login.LoginActivity;
 
 /**
  * Created by Yomna on 11/22/2016.
@@ -143,7 +144,16 @@ public class RegisterActivity extends AppCompatActivity implements RegisterBaseV
     @Override
     public void registerSuccess(User user) {
         //start main activity
-        Intent i = HomeActivity.getStartIntent(RegisterActivity.this);
+        Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
+        startActivity(intent);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        //set flag no history no return for stacked activities
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
+        //destroy current activity
+        finish();
+
+      /*  Intent i = HomeActivity.getStartIntent(RegisterActivity.this);
         // start new activity is considered as a new task so define flag for it
        // i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
@@ -153,7 +163,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterBaseV
         i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(i);
         //destroy current activity
-        finish();
+        finish();*/
     }
 
     @Override

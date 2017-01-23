@@ -18,6 +18,8 @@ public class GlobalEntities {
     public final static String REG_ID_TAG = "regId" ;
     public static final String LOGIN_PRESENTER_TAG = "login_presenter";
     public static final String REGISTER_PRESENTER_TAG = "register_presenter";
+    public static final String HOME_PRESENTER_TAG = "home_presenter";
+
     public static final String USER_LOGGED_IN_TAG = "user_logged_in";
     public static final String SUCCESS_TAG = "success";
 }

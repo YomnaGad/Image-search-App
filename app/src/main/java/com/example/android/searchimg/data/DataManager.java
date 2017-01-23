@@ -12,6 +12,7 @@ import com.example.android.searchimg.utils.GlobalEntities;
 
 import java.util.ArrayList;
 
+import okhttp3.MultipartBody;
 import rx.Observable;
 
 /**
@@ -69,7 +70,9 @@ public class DataManager {
     public Observable<Response> createUser(User user){
         Log.i(GlobalEntities.REGISTER_PRESENTER_TAG, "DATAMANGER: SUCCESS");
         return mService.createUser(user).asObservable();
-
+    }
+    public Observable<Response> upload( MultipartBody.Part image){
+        return  mService.upload( image);
     }
  /*  public Call createUser(User user){
        Log.i(GlobalEntities.REGISTER_PRESENTER_TAG, "DATAMANGER: SUCCESS");

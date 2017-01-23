@@ -7,5 +7,5 @@ package com.example.android.searchimg.data.model;
 public class Response {
     public int status;
     public User data;
-
+  //  public images image;
 }
