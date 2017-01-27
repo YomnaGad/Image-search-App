@@ -3,8 +3,8 @@ package com.example.android.searchimg.ui.register;
 import android.util.Log;
 
 import com.example.android.searchimg.data.DataManager;
+import com.example.android.searchimg.data.model.Request;
 import com.example.android.searchimg.data.model.Response;
-import com.example.android.searchimg.data.model.User;
 import com.example.android.searchimg.utils.GlobalEntities;
 
 import rx.Observer;
@@ -26,8 +26,8 @@ public class RegisterPresenter {
 
     }
 
-    public void onRegisterClicked(User user) {
-        mSubscription = dataManager.createUser(user)
+    public void onRegisterClicked(Request userRequest) {
+        mSubscription = dataManager.createUser(userRequest)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
 //               .subscribe(new Action1<ResponseBody>() {
@@ -57,7 +57,7 @@ public class RegisterPresenter {
                     public void onNext(Response response) {
                         Log.i(GlobalEntities.REGISTER_PRESENTER_TAG, "onNext:"+response.status);
                         if(response.status == 1){
-                            view.registerSuccess(response.data);
+                            view.registerSuccess(response.user);
                         }
                         else {
                             view.registerError("wrong user");

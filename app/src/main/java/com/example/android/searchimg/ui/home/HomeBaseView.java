@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public interface HomeBaseView {
     public void homeSuccess();
     public void homeError(String e);
+    public void tokenExpiredError();
     public void homeComplete();
-    public void userImages(ArrayList<String>userImages);
+    public void updateAdapter(ArrayList<String>userImages);
 }

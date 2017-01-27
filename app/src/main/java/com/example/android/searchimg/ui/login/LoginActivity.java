@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.android.searchimg.R;
 import com.example.android.searchimg.data.DataManager;
 import com.example.android.searchimg.data.local.PreferencesHelper;
+import com.example.android.searchimg.data.model.Request;
 import com.example.android.searchimg.data.model.User;
 import com.example.android.searchimg.ui.home.HomeActivity;
 import com.example.android.searchimg.ui.register.RegisterActivity;
@@ -40,7 +41,7 @@ public class LoginActivity extends AppCompatActivity implements LoginBaseView, V
     private LoginPresenter presenter;
 
     User user;
-
+    Request userRequest;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +58,6 @@ public class LoginActivity extends AppCompatActivity implements LoginBaseView, V
 
     private void init(){
         user = new User();
-
         mainView = findViewById(R.id.login_main_view);
 
         usernameTIL = (TextInputLayout) findViewById(R.id.login_usernameTIL);
@@ -86,9 +86,9 @@ public class LoginActivity extends AppCompatActivity implements LoginBaseView, V
                 user.setUsername(usernameTemp);
                 String passwordTemp = passwordED.getText().toString().replaceAll(" ", "");
                 user.setPassword(passwordTemp);
-
+                userRequest = new Request(user);
+               // presenter.login(userRequest);
                 presenter.login(user);
-
                 break;
             case R.id.link_to_register:
                 startActivity(RegisterActivity.getStartIntent(LoginActivity.this));
@@ -97,11 +97,13 @@ public class LoginActivity extends AppCompatActivity implements LoginBaseView, V
     }
 
     @Override
-    public void loginSuccess(User user) {
+    public void loginSuccess(String token) {
 
-        PreferencesHelper.saveToPrefs(this, GlobalEntities.USER_LOGGED_IN_TAG, GlobalEntities.SUCCESS_TAG);
         PreferencesHelper.saveToPrefs(this, GlobalEntities.USERNAME_TAG, user.getUsername());
         PreferencesHelper.saveToPrefs(this, GlobalEntities.Password_TAG, user.getPassword());
+        PreferencesHelper.saveToPrefs(this, GlobalEntities.APP_NAME_TOKEN, token);
+        String getToken = PreferencesHelper.getFromPrefs(this, GlobalEntities.APP_NAME_TOKEN, "");
+        //Log.v(GlobalEntities.LOGIN_PRESENTER_TAG, getToken);
         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
         startActivity(intent);
 

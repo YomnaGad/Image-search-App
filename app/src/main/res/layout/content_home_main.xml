@@ -23,6 +23,8 @@
         android:paddingRight="20dp"
         android:textSize="16sp"
         android:hint="Search here"
+        android:maxLength="100"
+        android:inputType="text"
         android:layout_marginTop="20dp" />
 
 
@@ -37,14 +39,14 @@
         android:layout_below="@+id/search"
         android:layout_centerInParent="true" />
 
-    <ImageView
+  <!--  <ImageView
         android:id="@+id/imgView"
         android:layout_below="@id/recycler_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@drawable/placeholder">
-    </ImageView>
+    </ImageView>-->
 
     <!--  <android.support.design.widget.FloatingActionButton
           android:id="@+id/fab"

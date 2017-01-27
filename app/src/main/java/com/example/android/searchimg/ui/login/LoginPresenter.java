@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.android.searchimg.data.DataManager;
 import com.example.android.searchimg.data.model.Response;
 import com.example.android.searchimg.data.model.User;
+import com.example.android.searchimg.ui.home.HomeBaseView;
 import com.example.android.searchimg.utils.GlobalEntities;
 
 import rx.Observer;
@@ -26,20 +27,15 @@ public class LoginPresenter {
         this.dataManager = dataManager;
     }
 
+    public LoginPresenter(HomeBaseView view, DataManager dataManager) {
+        this.view = (LoginBaseView) view;
+        this.dataManager = dataManager;
+    }
+
     public void login(User user){
        mSubscription = dataManager.login(user)
                .observeOn(AndroidSchedulers.mainThread())
                .subscribeOn(Schedulers.io())
-//               .subscribe(new Action1<ResponseBody>() {
-//                   @Override
-//                   public void call(ResponseBody responseBody) {
-//                       try {
-//                           Log.i(GlobalEntities.LOGIN_PRESENTER_TAG, "call: "+responseBody.string());
-//                       } catch (IOException e) {
-//                           e.printStackTrace();
-//                       }
-//                   }
-//               });
                .subscribe(new Observer<Response>() {
                    @Override
                    public void onCompleted() {
@@ -55,13 +51,13 @@ public class LoginPresenter {
 
                    @Override
                    public void onNext(Response response) {
-                       Log.i(GlobalEntities.LOGIN_PRESENTER_TAG, "onNext:"+response.status);
-                        if(response.status == 2){
-                            view.loginSuccess(response.data);
-                        }
-                        else {
-                            view.loginError("wrong user");
-                        }
+                       Log.i(GlobalEntities.LOGIN_PRESENTER_TAG, "onNext:"+response.token);
+                       if(response.token != null){
+                           view.loginSuccess(response.token);
+                       }
+                       else {
+                           view.loginError("wrong user");
+                       }
 
                    }
                });

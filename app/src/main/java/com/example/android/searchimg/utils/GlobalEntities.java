@@ -6,7 +6,8 @@ package com.example.android.searchimg.utils;
 public class GlobalEntities {
     //server urls
 //    public static final String ENDPOINT = "http://ec2-54-202-250-196.us-west-2.compute.amazonaws.com";
-    public static final String BASE_URL = "http://ec2-54-202-250-196.us-west-2.compute.amazonaws.com";
+
+    public static final String BASE_URL = "http://ec2-54-214-92-209.us-west-2.compute.amazonaws.com";
     //
 
     public final static String DATA_MANAGER_TAG = "data_manager";
@@ -22,4 +23,7 @@ public class GlobalEntities {
 
     public static final String USER_LOGGED_IN_TAG = "user_logged_in";
     public static final String SUCCESS_TAG = "success";
+    public static final String APP_NAME_TOKEN = "token";
+
+    public static final String AUTHO_TOKEN = "Authorization:JWT ";
 }

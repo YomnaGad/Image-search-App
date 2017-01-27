@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.android.searchimg.data.local.DatabaseHelper;
 import com.example.android.searchimg.data.local.PreferencesHelper;
+import com.example.android.searchimg.data.model.Request;
 import com.example.android.searchimg.data.model.Response;
 import com.example.android.searchimg.data.model.User;
 import com.example.android.searchimg.data.remote.Service;
@@ -63,16 +64,25 @@ public class DataManager {
         return list;
     }
 
-    public Observable<Response> login(User user){
-        return mService.login(user).asObservable();
+
+   /* public Observable<Response> login(Request userRequest){
+        return mService.login(userRequest).asObservable();
+    }
+*/
+   public Observable<Response> login(User user){
+       return mService.login(user).asObservable();
+   }
+    public Observable<Response> createUser(Request userRequest){
+        Log.i(GlobalEntities.REGISTER_PRESENTER_TAG, "DATAMANGER: SUCCESS");
+        return mService.createUser(userRequest).asObservable();
+    }
+    public Observable<Response> upload(String token, MultipartBody.Part image){
+        return  mService.upload(token, image);
     }
 
-    public Observable<Response> createUser(User user){
-        Log.i(GlobalEntities.REGISTER_PRESENTER_TAG, "DATAMANGER: SUCCESS");
-        return mService.createUser(user).asObservable();
-    }
-    public Observable<Response> upload( MultipartBody.Part image){
-        return  mService.upload( image);
+    public Observable<Response> retrieveImages (String token, String requestSearch)
+    {
+        return mService.fetchImages(token, requestSearch);
     }
  /*  public Call createUser(User user){
        Log.i(GlobalEntities.REGISTER_PRESENTER_TAG, "DATAMANGER: SUCCESS");

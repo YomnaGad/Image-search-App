@@ -3,22 +3,23 @@ package com.example.android.searchimg.data.model;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by Yomna on 1/1/2017.
+ * Created by Yomna on 1/24/2017.
  */
 
-public class Images {
+public class Data {
+    @SerializedName("user")
+    private String user;
 
     @SerializedName("image")
     private String image;
 
-    public Images( String image) {
-        this.image = image;
-
-    }
-    public Images() {
-        this("");
+    public String getUser() {
+        return user;
     }
 
+    public void setUser(String user) {
+        this.user = user;
+    }
 
     public String getImage() {
         return image;

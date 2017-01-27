@@ -13,9 +13,9 @@ import android.widget.Button;
 
 import com.example.android.searchimg.R;
 import com.example.android.searchimg.data.DataManager;
+import com.example.android.searchimg.data.model.Request;
 import com.example.android.searchimg.data.model.User;
 import com.example.android.searchimg.ui.home.HomeActivity;
-import com.example.android.searchimg.ui.login.LoginActivity;
 
 /**
  * Created by Yomna on 11/22/2016.
@@ -50,6 +50,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterBaseV
     private Button registerButtonView;
     private RegisterPresenter presenter;
     User user ;
+    Request userRequest;
     String temp = "";
     public static Intent getStartIntent(Context context){
         return new Intent(context, RegisterActivity.class);
@@ -133,8 +134,11 @@ public class RegisterActivity extends AppCompatActivity implements RegisterBaseV
                 Log.i("passwordED",passwordED.getText().toString() );
                 if(!ConfirmPasswordED.getText().toString().equals(user.getPassword()))
                     showPasswordMatchError(R.string.confirm_password_error_match);
-                else
-                    presenter.onRegisterClicked(user);
+                else {
+                    userRequest = new Request(user);
+                    presenter.onRegisterClicked(userRequest);
+
+                }
                 break;
 
         }

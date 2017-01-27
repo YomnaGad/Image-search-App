@@ -3,7 +3,6 @@ package com.example.android.searchimg.ui.home;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -18,11 +17,13 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.android.searchimg.R;
 import com.example.android.searchimg.data.DataManager;
+import com.example.android.searchimg.data.local.PreferencesHelper;
+import com.example.android.searchimg.ui.login.LoginActivity;
+import com.example.android.searchimg.utils.GlobalEntities;
 import com.ipaulpro.afilechooser.utils.FileUtils;
 
 import java.io.File;
@@ -32,15 +33,20 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
+import static com.example.android.searchimg.utils.GlobalEntities.APP_NAME_TOKEN;
+
 /**
  * Created by Yomna on 11/30/2016.
  */
 public class HomeActivity extends AppCompatActivity implements HomeBaseView, View.OnClickListener {
     private RecyclerView mRecyclerView;
     private EditText search;
+    private String searchText = "";
    // private FloatingActionButton fab;
     Context mContext;
+
     ArrayList<String> list;
+    ArrayList<String> filteredList ;
     HomeAdapter mAdapter;
     HomePresenter albumHomePresenter;
     private static int RESULT_LOAD_IMG = 1;
@@ -59,9 +65,8 @@ public class HomeActivity extends AppCompatActivity implements HomeBaseView, Vie
         setContentView(R.layout.activity_home_main);
 
         init();
-
+        mContext = this;
         addTextListener();
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +97,10 @@ public class HomeActivity extends AppCompatActivity implements HomeBaseView, Vie
                 MultipartBody.Part body = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
                 /*String descriptionString = "image";
                 RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"), descriptionString);*/
-                albumHomePresenter.uploadImage(body);
+                String token = "JWT "+ PreferencesHelper.getFromPrefs(this, APP_NAME_TOKEN, "");
+                //String token = "JWT " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImF5YSIsInVzZXJfaWQiOjEsImVtYWlsIjoiZXpAeWhvLmNvbSIsImV4cCI6MTQ4NTUzMDcxNn0.KyKGusiyHfUEW1vTFTBZUyB5pNL8-GuFmKsAWOvXZ0o";
+
+                albumHomePresenter.uploadImage(token, body);
 
                 String[] filePathColumn = { MediaStore.Images.Media.DATA };
                 //File file = new File(getRealPathFromURI(selectedImage));
@@ -106,12 +114,12 @@ public class HomeActivity extends AppCompatActivity implements HomeBaseView, Vie
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 imgDecodableString = cursor.getString(columnIndex);
                 cursor.close();
-                ImageView imgView = (ImageView) findViewById(R.id.imgView);
-                // Set the Image in ImageView after decoding the String
+               /* ImageView imgView = (ImageView) findViewById(R.id.imgView);
+                     // Set the Image in ImageView after decoding the String
                 imgView.setImageBitmap(BitmapFactory
-                        .decodeFile(imgDecodableString));
-                Toast.makeText(this, "You have picked Image lolololy",
-                        Toast.LENGTH_LONG).show();
+                        .decodeFile(imgDecodableString));*/
+                Toast.makeText(this, "You have picked Image",
+                        Toast.LENGTH_SHORT).show();
 
             }else {
                 Toast.makeText(this, "You haven't picked Image",
@@ -140,7 +148,9 @@ public class HomeActivity extends AppCompatActivity implements HomeBaseView, Vie
         search.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
-
+                String token = "JWT "+PreferencesHelper.getFromPrefs(mContext, GlobalEntities.APP_NAME_TOKEN, "");
+              // String token = "JWT " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImF5YSIsInVzZXJfaWQiOjEsImVtYWlsIjoiZXpAeWhvLmNvbSIsImV4cCI6MTQ4NTUzMDcxNn0.KyKGusiyHfUEW1vTFTBZUyB5pNL8-GuFmKsAWOvXZ0o";
+                albumHomePresenter.retrieveImageBySearch(token, searchText);
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -150,9 +160,10 @@ public class HomeActivity extends AppCompatActivity implements HomeBaseView, Vie
             public void onTextChanged(CharSequence query, int start, int before, int count) {
 
 
-                query = query.toString().toLowerCase();
+                searchText = query.toString().toLowerCase();
 
-                final ArrayList<String> filteredList = new ArrayList<>();
+
+               /* final ArrayList<String> filteredList = new ArrayList<>();
 
                 for (int i = 0; i < list.size(); i++) {
 
@@ -161,9 +172,9 @@ public class HomeActivity extends AppCompatActivity implements HomeBaseView, Vie
 
                         filteredList.add(list.get(i));
                     }
-                }
+                }*/
 
-                mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+             /*   mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
                 mRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 2));
                 mAdapter = new HomeAdapter(mContext,filteredList,true );
                 mRecyclerView.setAdapter(mAdapter);
@@ -173,11 +184,34 @@ public class HomeActivity extends AppCompatActivity implements HomeBaseView, Vie
                     mAdapter = new HomeAdapter(mContext,filteredList,false );
                     mRecyclerView.setAdapter(mAdapter);
 
-                }
+                }*/
+
 
             }
         });
     }
+
+
+
+
+    @Override
+    public void updateAdapter(ArrayList<String> filteredList){
+        list = new ArrayList<>();
+        list.addAll(filteredList);
+        mAdapter.notifyDataSetChanged();/*
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 2));*/
+        mAdapter = new HomeAdapter(this,list,true );
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
+        if(search.getText().toString().matches(""))
+        {
+            mAdapter = new HomeAdapter(this,list,false );
+            mRecyclerView.setAdapter(mAdapter);
+
+        }
+    }
+
 
     public void init() {
         search = (EditText) findViewById( R.id.search);
@@ -193,7 +227,7 @@ public class HomeActivity extends AppCompatActivity implements HomeBaseView, Vie
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         //presenter
         albumHomePresenter = new HomePresenter(this, DataManager.getInstance(null, null, null, null));
-       // albumHomePresenter.loadImages();
+
 
     }
 
@@ -208,16 +242,24 @@ public class HomeActivity extends AppCompatActivity implements HomeBaseView, Vie
         Toast.makeText(this, "Opss try uploading again",
                 Toast.LENGTH_LONG).show();
     }
+    @Override
+    public void tokenExpiredError(){
+       Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+        startActivity(intent);
+        Toast.makeText(this, "Session expired login again",
+                Toast.LENGTH_LONG).show();
+
+    }
 
     @Override
     public void homeComplete() {
 
     }
 
-    @Override
+ /*   @Override
     public void userImages(ArrayList<String> userImages) {
         list.clear();
         list.addAll(userImages);
         mAdapter.notifyDataSetChanged();
-    }
+    }*/
 }
